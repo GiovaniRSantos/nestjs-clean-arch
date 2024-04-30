@@ -13,13 +13,7 @@ export class ProjectsService {
   ) {}
 
   create(createProjectDto: CreateProjectDto) {
-    const project = new Project(createProjectDto);
-
-    if (createProjectDto.started_at) {
-      project.status = ProjectStatus.Active;
-    }
-
-    return this.projectRepo.save(project);
+  
   }
 
   findAll() {

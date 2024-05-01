@@ -12,12 +12,15 @@ import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { CreateProjectUseCase } from './use-cases/create-project-use-case';
 import { FindAllProjectsUseCase } from './use-cases/find-all-project-use-case';
+import { StartProjectUseCase } from './use-cases/start-project-use-case';
+import { StartProjectDto } from './dto/start-project.dto';
 
 @Controller('projects')
 export class ProjectsWithUseCaseController {
   constructor(
     private readonly createProjectUseCase: CreateProjectUseCase,
     private readonly findAllProjectsUseCase: FindAllProjectsUseCase,
+    private readonly startProjectUseCase: StartProjectUseCase,
   ) {}
 
   @Post()
@@ -35,10 +38,10 @@ export class ProjectsWithUseCaseController {
   //   return this.projectsService.findOne(id);
   // }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateProjectDto: UpdateProjectDto) {
-  //   return this.projectsService.update(id, updateProjectDto);
-  // }
+  @Post(':id/start')
+  start(@Param('id') id: string, @Body() startProjectDto: StartProjectDto) {
+    return this.startProjectUseCase.execute(id, startProjectDto);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {
